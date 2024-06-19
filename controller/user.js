@@ -67,7 +67,7 @@ const login = async (req, res) => {
     res.cookie("authcookie", jwtToken, {
       maxAge: new Date(Date.now() + 2589200000),
       httpOnly: true,
-      sameSite: "None",
+      // sameSite: "none",
     });
 
     res.status(200).json({
@@ -118,7 +118,7 @@ const register = async (req, res) => {
     res.cookie("authcookie", jwtToken, {
       maxAge: new Date(Date.now() + 2589200000),
       httpOnly: true,
-      sameSite: "None",
+      // sameSite: "none",
     });
 
     res.status(200).json({
