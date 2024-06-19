@@ -1,5 +1,5 @@
 const allowedOrigins = [
-    'https://amazon-clone-frontend-seven.vercel.app',
+    'https://easyshop-backend-ofyo.onrender.com',
     'http://localhost:3000',
 ]
 // this is the list of allowed origins only these origins can access the resources
