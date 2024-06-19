@@ -18,7 +18,7 @@ const corsOpt = {
     },
     credentials : true,
     optionsSuccessStatus : 200,
-    withCredentials: true,
+  
 }
 
 
