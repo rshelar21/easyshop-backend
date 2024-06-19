@@ -26,13 +26,13 @@ const jwt = require("jsonwebtoken");
 const authCheck = async (req, res, next) => {
   try {
     const authcookie = req.cookies.authcookie;
-    // console.log(authcookie, 'authcookie');
+    console.log(authcookie, 'authcookie');
     if (!authcookie) {
       return res.status(401).json({ message: "Unauthorized", result: false });
     }
     const verifyUser = await jwt.verify(authcookie, process.env.JWT_SECRET, (err, res) => {
       if (err) {
-        console.log(err, 'err');
+        // console.log(err, 'err');
         return "token expired";
       }
       return res;

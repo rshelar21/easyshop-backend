@@ -5,9 +5,8 @@ const orderData = async (req, res) => {
   try {
     const user = req.user;
     console.log(user);
-    const product = await orderModel.findById(user?.id);
-    console.log(product);
-    if (!product)
+    const product = await orderModel.find({userId : user?.id});
+    if (!product.length)
       return res
         .status(200)
         .json({ message: "No product found", result: false, product : [] });

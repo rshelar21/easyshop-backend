@@ -10,7 +10,7 @@ const productRouter = require("./routes/product");
 const corsOpt = require("./config/corsOpt");
 const webhookController = require("./routes/webhook");
 const orderRouter = require("./routes/orderHistory");
-
+const productModel = require("./models/productModel");
 
 app.use(cors(corsOpt));
 app.use(express.json()); // To parse the incoming requests with JSON payloads
@@ -22,9 +22,10 @@ app.get("/", function (req, res) {
 });
 
 app.use("/api/v1", userRouter);
-app.use("/api/v1/create-checkout-session", productRouter);
+app.use("/api/v1", productRouter);
 app.use("/api/webhook", webhookController);
 app.use("/api/v1", orderRouter);
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

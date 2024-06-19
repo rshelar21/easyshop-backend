@@ -1,12 +1,12 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const productModel = require("../models/productModel");
 
-const purchase = async (req, res) => {
+const buyProducts = async (req, res) => {
   const { email, items } = req.body;
 
   try {
-    // console.log(process.env.FRONTEND_URL);
     const user = await req.user;
-  
+
     const transformItems = await items?.map((item) => ({
       quantity: 1,
       price_data: {
@@ -39,7 +39,7 @@ const purchase = async (req, res) => {
         },
       },
       success_url: `http://localhost:3000/orders-history`,
-      cancel_url: 'http://localhost:3000/',
+      cancel_url: "https://easyshop-eta.vercel.app/",
     });
     res.status(200).json({ result: true, id: session.id });
   } catch (error) {
@@ -47,4 +47,18 @@ const purchase = async (req, res) => {
   }
 };
 
-module.exports = { purchase };
+const getProducts = async (req, res) => {
+  try {
+    const products = await productModel.find({});
+    if (!products.length) {
+      res
+        .status(200)
+        .json({ message: "No products found", result: false, products: [] });
+    }
+    res.status(200).json({ message: "Products found", result: true, products });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { buyProducts, getProducts };
