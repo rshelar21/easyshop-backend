@@ -1,7 +1,8 @@
 const allowedOrigins = [
     'http://localhost:3000',
     'https://easyshop-eta.vercel.app',
-    'https://easyshop-backend-ofyo.onrender.com'
+    'https://easyshop-backend-ofyo.onrender.com',
+    'http://localhost:8080',
 ]
 // this is the list of allowed origins only these origins can access the resources
 
@@ -16,8 +17,8 @@ const corsOpt = {
         }
     },
     credentials : true,
-    optionsSuccessStatus : 200
-
+    optionsSuccessStatus : 200,
+    withCredentials: true,
 }
 
 
