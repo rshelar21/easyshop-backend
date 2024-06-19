@@ -1,6 +1,7 @@
 const allowedOrigins = [
     'http://localhost:3000',
-    'https://easyshop-eta.vercel.app'
+    'https://easyshop-eta.vercel.app',
+    'https://easyshop-backend-ofyo.onrender.com'
 ]
 // this is the list of allowed origins only these origins can access the resources
 
