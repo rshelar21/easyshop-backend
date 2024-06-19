@@ -38,8 +38,8 @@ const buyProducts = async (req, res) => {
           user: user?.id,
         },
       },
-      success_url: `http://localhost:3000/orders-history`,
-      cancel_url: "https://easyshop-eta.vercel.app/",
+      success_url: `https://easyshop-eta.vercel.app/orders-history`,
+      cancel_url: "https://easyshop-eta.vercel.app",
     });
     res.status(200).json({ result: true, id: session.id });
   } catch (error) {
