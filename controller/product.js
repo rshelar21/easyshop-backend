@@ -1,5 +1,6 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const productModel = require("../models/productModel");
+const { options } = require("../routes/product");
 
 const buyProducts = async (req, res) => {
   const { email, items } = req.body;
@@ -50,15 +51,42 @@ const buyProducts = async (req, res) => {
 const getProducts = async (req, res) => {
   try {
     const products = await productModel.find({});
+
     if (!products.length) {
       res
         .status(200)
         .json({ message: "No products found", result: false, products: [] });
     }
-    res.status(200).json({ message: "Products found", result: true, products });
+    res.status(200).json({
+      message: "Products found",
+      result: true,
+      products,
+    });
   } catch (error) {
     console.log(error);
   }
 };
 
-module.exports = { buyProducts, getProducts };
+const getProductsByQuery = async (req, res) => {
+  const title = req.query.title;
+  try {
+    const queryProductsList = await productModel.find({
+      title: { $regex: title, $options: "i" },
+    });
+    if (!queryProductsList.length) {
+      res
+        .status(200)
+        .json({ message: "No products found", result: false, products: [] });
+    }
+
+    res.status(200).json({
+      message: "Products found",
+      result: true,
+      products: queryProductsList,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { buyProducts, getProducts, getProductsByQuery };
